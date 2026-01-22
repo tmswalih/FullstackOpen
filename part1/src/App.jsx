@@ -7,7 +7,7 @@ const Header = (props) => {
   )
 }
 
-const Content = () => {
+const Content = (props) => {
   const part1 = 'Fundamentals of React'
   const exercises1 = 10
   const part2 = 'Using props to pass data'
