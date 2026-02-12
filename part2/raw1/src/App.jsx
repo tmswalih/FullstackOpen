@@ -1,5 +1,6 @@
 import Note from './components/Note'
 import { useState } from 'react'
+import Notification from './components/Notification'
 
 
 const App = (props) => {
@@ -7,6 +8,7 @@ const App = (props) => {
   console.log(notes)
   const [newNote, setNewNote] = useState('a new note...')
   const [showAll, setShowAll] = useState(true)
+  const [errorMessage,seterrorMessage] = useState('some error happened...')
 
   const addNote = (event) => {
   event.preventDefault()
@@ -31,6 +33,7 @@ const App = (props) => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification message = {errorMessage} />
       <ul>
         {notesToShow.map((note) => (
           <Note key={note.id} note={note} />

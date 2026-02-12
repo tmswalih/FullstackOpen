@@ -1,0 +1,17 @@
+h1{
+    color: green;
+    font-style: italic;
+}
+.hidden{
+    display: none;
+}
+
+.message{
+    color: green;
+    background-color: lightgrey;
+    font-size: 20px;
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
