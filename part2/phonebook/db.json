@@ -1,74 +1,24 @@
 {
   "persons": [
     {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": "2"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    },
-    {
-      "id": "c5aa",
-      "name": "jiortoor",
-      "number": "hohfreioht"
-    },
-    {
-      "id": "17a2",
-      "name": "Swaih",
-      "number": "1"
-    },
-    {
       "id": "d790",
       "name": "Mohammed Swalih T",
       "number": "098765"
     },
     {
-      "id": "841b",
-      "name": "Iyas",
-      "number": "6"
+      "id": "9969",
+      "name": "swaih",
+      "number": "456"
     },
     {
-      "id": "66d6",
-      "name": "orange",
-      "number": "89"
+      "id": "6543",
+      "name": "swalih",
+      "number": "234"
     },
     {
-      "id": "1b7c",
-      "name": "p",
-      "number": "9"
-    },
-    {
-      "id": "80f8",
-      "name": "o",
-      "number": "6"
-    },
-    {
-      "id": "9101",
-      "name": "i",
-      "number": "8"
-    },
-    {
-      "id": "41a8",
-      "name": "y",
-      "number": "7"
-    },
-    {
-      "id": "a49c",
-      "name": "h",
-      "number": "5"
-    },
-    {
-      "id": "dd66",
-      "name": "Naswih",
-      "number": "5456"
-    },
-    {
-      "id": "35e8",
+      "id": "de11",
       "name": "naswih",
-      "number": "777"
+      "number": "123"
     }
   ]
 }

@@ -13,6 +13,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [message,setMessage] = useState(null)
+  const [errorMessage,setErrorMessage] = useState(null)
   
   
   useEffect(() => {
@@ -51,6 +52,10 @@ const App = () => {
           .catch(error => {
             alert(`Information of ${newName} has already been removed from the server`)
             setPersons(persons.filter(p => p.id !== person.id))
+            setErrorMessage(`Information of ${newName} has already been removed from the server`)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
           })
 
       }
@@ -72,6 +77,10 @@ const App = () => {
       }, 5000)
       .catch(error => {
         alert(error.response.data.error)
+        setErrorMessage(error.response.data.error)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
     }
   }
@@ -95,6 +104,10 @@ const App = () => {
     .catch(error => {
       alert(`Information of ${person.name} has already been removed from the server`)
       setPersons(persons.filter(p => p.id !== id))
+      setErrorMessage(`Information of ${person.name} has already been removed from the server`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     })
 }
 
@@ -104,7 +117,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={message}  />
+      <Notification message={message} errorMessage = {errorMessage} />
       <Filter newName={newName} setNewName={setNewName} />
       <h3>Add a new</h3>
       <PersonForm addPerson={addPerson} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} />
