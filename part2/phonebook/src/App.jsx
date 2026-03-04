@@ -69,12 +69,13 @@ const App = () => {
         setPersons(persons.concat(response.data))
         setNewName('')
         setNewNumber('')
-      })
+      
       
       setMessage(`Added ${newName}`)
       setTimeout(() => {
         setMessage(null)
       }, 5000)
+      })
       .catch(error => {
         alert(error.response.data.error)
         setErrorMessage(error.response.data.error)
@@ -100,6 +101,11 @@ const App = () => {
     .remove(id)
     .then(() => {
       setPersons(persons.filter(p => p.id !== id))
+
+      setMessage(`Deleted ${person.name}`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     })
     .catch(error => {
       alert(`Information of ${person.name} has already been removed from the server`)
