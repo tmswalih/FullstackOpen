@@ -1,11 +1,12 @@
-
-
-const Persons = ({ filteredPersons,handleDelete }) => {
-  
-
+const Persons = ({ filteredPersons, handleDelete }) => {
   return (
     <ul>
-      {filteredPersons.map(person => <li key={person.name}>{person.name} {person.number}<button onClick={() =>handleDelete(person.id)} >Delete</button></li>)}
+      {filteredPersons.map(person => (
+        <li key={person._id}>
+          {person.name} {person.number}
+          <button onClick={() => handleDelete(person._id)}>Delete</button>
+        </li>
+      ))}
     </ul>
   )
 }

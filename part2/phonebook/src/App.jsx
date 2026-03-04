@@ -26,95 +26,103 @@ const App = () => {
   
 
   const addPerson = (event) => {
-    event.preventDefault()
-    const personObject = {
-      name: newName,
-      number: newNumber
-    }
-  
-    if (persons.some(person => person.name === newName)) {
-      const confirm = window.confirm(`${newName} is already added to phonebook,
-         replace the old number with a new one?`)
-      if (confirm) {
-        const person = persons.find(p => p.name === newName)
-        const updatedPerson = { ...person, number: newNumber }
-        personServices
-          .update(person.id, updatedPerson)
-          .then(response => {
-            setPersons(persons.map(p => p.id !== person.id ? p : response.data))
-            setNewName('')
-            setNewNumber('')
-          })
-          setMessage(`Updated ${newName}'s number`)
-          setTimeout(() => {
-            setMessage(null)
-          }, 5000)
-          .catch(error => {
-            alert(`Information of ${newName} has already been removed from the server`)
-            setPersons(persons.filter(p => p.id !== person.id))
-            setErrorMessage(`Information of ${newName} has already been removed from the server`)
-            setTimeout(() => {
-              setErrorMessage(null)
-            }, 5000)
-          })
+  event.preventDefault()
 
-      }
-      return
-      
-    }
-    else{
+  const personObject = {
+    name: newName,
+    number: newNumber
+  }
+
+  const existingPerson = persons.find(p => p.name === newName)
+
+  if (existingPerson) {
+    const confirm = window.confirm(
+      `${newName} is already added to phonebook, replace the old number with a new one?`
+    )
+
+    if (!confirm) return
+
+    const updatedPerson = { ...existingPerson, number: newNumber }
+
     personServices
-      .create(personObject)
+      .update(existingPerson._id, updatedPerson)
       .then(response => {
-        setPersons(persons.concat(response.data))
+        setPersons(persons.map(p =>
+          p._id !== existingPerson._id ? p : response.data
+        ))
+
         setNewName('')
         setNewNumber('')
-      
-      
-      setMessage(`Added ${newName}`)
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
+
+        setMessage(`Updated ${existingPerson.name}'s number`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
       .catch(error => {
-        alert(error.response.data.error)
-        setErrorMessage(error.response.data.error)
+        alert(`Information of ${existingPerson.name} has already been removed from the server`)
+        setPersons(persons.filter(p => p._id !== existingPerson._id))
+
+        setErrorMessage(`Information of ${existingPerson.name} has already been removed from the server`)
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
       })
-    }
+
+    return
   }
-  console.log(persons)
-
-  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(newName.toLowerCase())) 
-  
-  const handleDelete = (id) => {
-  const person = persons.find(p => p.id === id)
-
-  if (!person) return
-
-  const ok = window.confirm(`Delete ${person.name}?`)
-  if (!ok) return
 
   personServices
-    .remove(id)
-    .then(() => {
-      setPersons(persons.filter(p => p.id !== id))
+    .create(personObject)
+    .then(response => {
+      setPersons(persons.concat(response.data))
+      setNewName('')
+      setNewNumber('')
 
-      setMessage(`Deleted ${person.name}`)
+      setMessage(`Added ${newName}`)
       setTimeout(() => {
         setMessage(null)
       }, 5000)
     })
     .catch(error => {
-      alert(`Information of ${person.name} has already been removed from the server`)
-      setPersons(persons.filter(p => p.id !== id))
-      setErrorMessage(`Information of ${person.name} has already been removed from the server`)
+      alert(error.response.data.error)
+
+      setErrorMessage(error.response.data.error)
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
     })
+}
+  console.log(persons)
+
+  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(newName.toLowerCase())) 
+  
+const handleDelete = (id) => {
+    const person = persons.find(p => p._id === id)
+
+    if (!person) return
+
+    const ok = window.confirm(`Delete ${person.name}?`)
+    if (!ok) return
+
+    personServices
+      .remove(id)
+      .then(() => {
+        setPersons(persons.filter(p => p._id !== id))
+
+        setMessage(`Deleted ${person.name}`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+      })
+      .catch(error => {
+        alert(`Information of ${person.name} has already been removed from the server`)
+        setPersons(persons.filter(p => p._id !== id))
+        setErrorMessage(`Information of ${person.name} has already been removed from the server`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
 }
 
 
