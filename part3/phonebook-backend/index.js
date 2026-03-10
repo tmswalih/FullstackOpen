@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
@@ -7,57 +8,26 @@ const Person = require('./models/person')
 
 const app = express()
 
+// MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(error => console.log('Error connecting to MongoDB:', error.message))
 
-app.use(express.static('build'))
+// Middleware
 app.use(cors())
+app.use(express.static('dist'))
 app.use(express.json())
 
-morgan.token('body', (req) => JSON.stringify(req.body))
+morgan.token('body', req => JSON.stringify(req.body))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+
+// Routes
 
 app.get('/api/persons', (req, res, next) => {
   Person.find({})
     .then(persons => res.json(persons))
     .catch(error => next(error))
 })
-
-app.post('/api/persons', (req, res, next) => {
-  const body = req.body
-
-  if (!body.name || !body.number) {
-    return res.status(400).json({
-      error: 'name and number are required'
-    })
-  }
-
-  const person = new Person({
-    name: body.name,
-    number: body.number
-  })
-
-  person.save()
-    .then(savedPerson => res.json(savedPerson))
-    .catch(error => next(error))
-})
-
-
-app.get('/info', (req, res, next) => {
-  Person.countDocuments({})
-    .then(count => {
-      res.send(`
-        <div>
-          <p>Phonebook has info for ${count} people</p>
-          <p>${new Date()}</p>
-        </div>
-      `)
-    })
-    .catch(error => next(error))
-})
-
-
 
 app.get('/api/persons/:id', (req, res, next) => {
   Person.findById(req.params.id)
@@ -68,7 +38,20 @@ app.get('/api/persons/:id', (req, res, next) => {
         res.status(404).json({ error: 'person not found' })
       }
     })
-    .catch(error => next(error)) // malformatted id goes to error handler
+    .catch(error => next(error))
+})
+
+app.post('/api/persons', (req, res, next) => {
+  const { name, number } = req.body
+
+  const person = new Person({
+    name,
+    number
+  })
+
+  person.save()
+    .then(savedPerson => res.json(savedPerson))
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
@@ -80,19 +63,8 @@ app.put('/api/persons/:id', (req, res, next) => {
     { new: true, runValidators: true, context: 'query' }
   )
     .then(updatedPerson => {
-      if (!updatedPerson) {
-        return res.status(404).json({ error: 'Person not found' })
-      }
-      res.json(updatedPerson)
-    })
-    .catch(error => next(error))
-})
-
-app.delete('/api/persons/:id', (req, res, next) => {
-  Person.findByIdAndDelete(req.params.id)
-    .then(result => {
-      if (result) {
-        res.status(204).end()
+      if (updatedPerson) {
+        res.json(updatedPerson)
       } else {
         res.status(404).json({ error: 'person not found' })
       }
@@ -100,7 +72,24 @@ app.delete('/api/persons/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
+app.delete('/api/persons/:id', (req, res, next) => {
+  Person.findByIdAndDelete(req.params.id)
+    .then(() => res.status(204).end())
+    .catch(error => next(error))
+})
 
+app.get('/info', (req, res, next) => {
+  Person.countDocuments({})
+    .then(count => {
+      res.send(`
+        <p>Phonebook has info for ${count} people</p>
+        <p>${new Date()}</p>
+      `)
+    })
+    .catch(error => next(error))
+})
+
+// Error Handler
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
@@ -109,9 +98,7 @@ const errorHandler = (error, req, res, next) => {
   }
 
   if (error.name === 'ValidationError') {
-    return res.status(400).json({
-      error: error.message
-    })
+    return res.status(400).json({ error: error.message })
   }
 
   next(error)
@@ -119,7 +106,7 @@ const errorHandler = (error, req, res, next) => {
 
 app.use(errorHandler)
 
-
+// Start server
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
