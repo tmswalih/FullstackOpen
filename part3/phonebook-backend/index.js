@@ -72,19 +72,17 @@ app.get('/api/persons/:id', (req, res, next) => {
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
-  const body = req.body
-
-  const person = {
-    name: body.name,
-    number: body.number
-  }
+  const { name, number } = req.body
 
   Person.findByIdAndUpdate(
     req.params.id,
-    person,
+    { name, number },
     { new: true, runValidators: true, context: 'query' }
   )
     .then(updatedPerson => {
+      if (!updatedPerson) {
+        return res.status(404).json({ error: 'Person not found' })
+      }
       res.json(updatedPerson)
     })
     .catch(error => next(error))
@@ -110,10 +108,17 @@ const errorHandler = (error, req, res, next) => {
     return res.status(400).json({ error: 'malformatted id' })
   }
 
-  return res.status(500).json({ error: 'internal server error' })
+  if (error.name === 'ValidationError') {
+    return res.status(400).json({
+      error: error.message
+    })
+  }
+
+  next(error)
 }
 
 app.use(errorHandler)
+
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
