@@ -1,0 +1,189 @@
+[dotenv@17.3.1] injecting env (4) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ blogs are returned as json (7793.612349ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ all blogs are returned (2854.854904ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ the unique identifier property of the blog posts is named id (3069.432882ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ a valid blog can be added (2563.848848ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✔ adding a blog fails with status 401 if token is not provided (2646.162445ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ if likes property is missing, it defaults to 0 (2363.060212ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ blog without title or url is not added (2252.368827ms)
+Cannot read properties of undefined (reading 'lookup')
+Cannot read properties of undefined (reading 'lookup')
+✖ a blog can be deleted (2561.933153ms)
+Cannot read properties of undefined (reading 'lookup')
+(node:15634) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PUT Error: TypeError: Cannot read properties of undefined (reading 'lookup')
+    at ServerResponse.header (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/express/lib/response.js:789:37)
+    at ServerResponse.json (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/express/lib/response.js:275:10)
+    at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/controllers/blogs.js:66:16
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+Cannot read properties of undefined (reading 'lookup')
+✖ a blog can be updated (likes) (2847.025476ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 1
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31088.930311
+
+✖ failing tests:
+
+test at tests/blog_api.test.js:36:1
+✖ blogs are returned as json (7793.612349ms)
+  Error: expected 200 "OK", got 500 "Internal Server Error"
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:39:6)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+  ----
+      at Test._assertStatus (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:309:14)
+      at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:365:13
+      at Test._assertFunction (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:342:13)
+      at Test.assert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:195:23)
+      at localAssert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:138:14)
+      at Server.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:152:11)
+      at Object.onceWrapper (node:events:622:28)
+      at Server.emit (node:events:508:20)
+      at emitCloseNT (node:net:2419:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+
+test at tests/blog_api.test.js:43:1
+✖ all blogs are returned (2854.854904ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 2
+  
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:46:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/blog_api.test.js:49:1
+✖ the unique identifier property of the blog posts is named id (3069.432882ms)
+  TypeError: response.body.map is not a function
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:51:29)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7)
+
+test at tests/blog_api.test.js:58:1
+✖ a valid blog can be added (2563.848848ms)
+  Error: expected 201 "Created", got 401 "Unauthorized"
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:70:6)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7)
+  ----
+      at Test._assertStatus (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:309:14)
+      at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:365:13
+      at Test._assertFunction (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:342:13)
+      at Test.assert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:195:23)
+      at localAssert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:138:14)
+      at Server.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:152:11)
+      at Object.onceWrapper (node:events:622:28)
+      at Server.emit (node:events:508:20)
+      at emitCloseNT (node:net:2419:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+
+test at tests/blog_api.test.js:97:1
+✖ if likes property is missing, it defaults to 0 (2363.060212ms)
+  Error: expected 201 "Created", got 401 "Unauthorized"
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:108:6)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7)
+  ----
+      at Test._assertStatus (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:309:14)
+      at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:365:13
+      at Test._assertFunction (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:342:13)
+      at Test.assert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:195:23)
+      at localAssert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:138:14)
+      at Server.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:152:11)
+      at Object.onceWrapper (node:events:622:28)
+      at Server.emit (node:events:508:20)
+      at emitCloseNT (node:net:2419:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+
+test at tests/blog_api.test.js:114:1
+✖ blog without title or url is not added (2252.368827ms)
+  Error: expected 400 "Bad Request", got 401 "Unauthorized"
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:124:6)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7)
+  ----
+      at Test._assertStatus (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:309:14)
+      at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:365:13
+      at Test._assertFunction (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:342:13)
+      at Test.assert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:195:23)
+      at localAssert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:138:14)
+      at Server.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:152:11)
+      at Object.onceWrapper (node:events:622:28)
+      at Server.emit (node:events:508:20)
+      at emitCloseNT (node:net:2419:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+
+test at tests/blog_api.test.js:141:1
+✖ a blog can be deleted (2561.933153ms)
+  Error: expected 204 "No Content", got 401 "Unauthorized"
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:148:6)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7)
+  ----
+      at Test._assertStatus (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:309:14)
+      at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:365:13
+      at Test._assertFunction (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:342:13)
+      at Test.assert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:195:23)
+      at localAssert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:138:14)
+      at Server.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:152:11)
+      at Object.onceWrapper (node:events:622:28)
+      at Server.emit (node:events:508:20)
+      at emitCloseNT (node:net:2419:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+
+test at tests/blog_api.test.js:158:1
+✖ a blog can be updated (likes) (2847.025476ms)
+  Error: expected 200 "OK", got 500 "Internal Server Error"
+      at TestContext.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/tests/blog_api.test.js:170:6)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7)
+  ----
+      at Test._assertStatus (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:309:14)
+      at /home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:365:13
+      at Test._assertFunction (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:342:13)
+      at Test.assert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:195:23)
+      at localAssert (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:138:14)
+      at Server.<anonymous> (/home/swalih/Desktop/MiniProject/FullstackOpen/part4/bloglist-backend/node_modules/supertest/lib/test.js:152:11)
+      at Object.onceWrapper (node:events:622:28)
+      at Server.emit (node:events:508:20)
+      at emitCloseNT (node:net:2419:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
